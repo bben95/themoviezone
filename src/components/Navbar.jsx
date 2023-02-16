@@ -19,26 +19,26 @@ const Navbar = () => {
   return (
     <div className='w-full flex items-center justify-between p-4 z-[100] absolute'>
       <Link to='/'>
-      <h1 className='text-red-600 text-2xl md:text-4xl  font-bold cursor-pointer'>MOVIEZONE</h1>
+      <h1 className='text-red-600 text-xl md:text-4xl  font-bold cursor-pointer'>MOVIEZONE</h1>
       </Link>
         
        {user?.email ?(
         <div>
         <Link to='/account'>
-        <button className='text-white pr-4  text-lg'>Account</button>
+        <button className='text-white pr-4  text-base md:text-lg'>Account</button>
         </Link>
         
-        <motion.button whileTap={{scale:0.75}} onClick={handleLogout} className='bg-red-600 px-6 py-2 rounded cursor-pointer text-lg text-white focus:'>Logout</motion.button>
+        <motion.button whileTap={{scale:0.75}} onClick={handleLogout} className='bg-red-600 px-6 py-2 rounded cursor-pointer text-base md:text-lg text-white focus:'>Logout</motion.button>
         
           
       </div>
        ):(
         <div>
         <Link to='/login'>
-        <button className='text-white pr-4  text-lg'>Sign In</button>
+        <button className='text-white pr-4 text-base md:text-lg'>Sign In</button>
         </Link>
         <Link to='/signup'>
-        <motion.button whileTap={{scale:0.75}} className='bg-red-600 px-6 py-2 rounded cursor-pointer text-lg text-white focus:'>Sign Up</motion.button>
+        <motion.button whileTap={{scale:0.75}} className='bg-red-600 px-6 py-2 rounded cursor-pointer text-base md:text-lg text-white focus:'>Sign Up</motion.button>
         </Link>
           
       </div>
