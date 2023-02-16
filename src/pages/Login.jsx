@@ -1,7 +1,29 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserAuth } from '../context/AuthContext'
+import { motion } from 'framer-motion'
+
 
 const Login = () => {
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+  const [error,setError]=useState('')
+  const{user,logIn}=UserAuth();
+  const navigate=useNavigate();
+
+  const handleSubmit=async (e)=>{
+    setError('')
+    e.preventDefault()
+    try {
+      await logIn(email,password)
+      navigate('/');
+      console.log(user);
+    } catch (error) {
+      console.log(error)
+      setError(error.message)
+    }
+   
+  }
   
   return (
     <>
@@ -14,10 +36,11 @@ const Login = () => {
         <div className='max-w-[400px] h-[500px] mx-auto bg-black/75 text-white'>
           <div className='max-w-[320px] mx-auto py-14'>
             <h1 className='text-3xl font-bold '>Sign In</h1>
-            <form className='w-full flex flex-col py-4' >
-               <input className='p-3 my-2 bg-gray-700 rounded' type="email" placeholder='Email' autoComplete='email'  />
-                <input className='p-3 my-2 bg-gray-700 rounded' type="password" placeholder='Password'  autoComplete='current-password'  />
-                <button className='bg-red-600 py-3 my-4 rounded font-bold'>Sign In</button>
+            {error ? <p className='p-3 bg-red-400 my-2'>{error}</p>:<></>}
+            <form className='w-full flex flex-col py-4' onSubmit={handleSubmit} >
+               <input className='p-3 my-2 bg-gray-700 rounded' type="email" placeholder='Email' autoComplete='email' onChange={(e)=>{setEmail(e.target.value); setError('')}} />
+                <input className='p-3 my-2 bg-gray-700 rounded' type="password" placeholder='Password'  autoComplete='current-password' onChange={(e)=>{setPassword(e.target.value)}}  />
+                <motion.button whileTap={{scale:0.6}} className='bg-red-600 py-3 my-4 rounded font-bold'>Sign In</motion.button>
                 <div className='flex justify-between items-center text-sm text-gray-600'>
                   <p> <input type="checkbox"className='mr-2' />Remember me</p>
                   <p>Need Help?</p>

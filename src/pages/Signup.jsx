@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -9,10 +9,12 @@ const Signup = () => {
   const [password,setPassword]=useState('')
   const [name,setName]=useState('')
   const{user,signUp}=UserAuth();
+  const navigate=useNavigate();
   const handleSubmit=async (e)=>{
     e.preventDefault()
     try {
       await signUp(name,email,password)
+      navigate('/');
       console.log(user);
     } catch (error) {
       console.log(error)
